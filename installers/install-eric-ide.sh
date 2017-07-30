@@ -19,10 +19,11 @@ then
   if [ -f  ${ERIC_INSTALL}/venv/bin/activate ];
   then
     source $ERIC_INSTALL/venv/bin/activate
-    if [ -z "$(who am i)" ];
+    python -c 'import os; os.getlogin()' 2>/dev/null
+    if [ $? -ne 0 ];
     then
         # This is needed for compatibility with gnome-terminal which has dropped utmp support in recent versions
-        # The uninstall.py relies on os.getlogin which reads from the utmp registry
+        # which causes uninstall.py to crash as it relies on os.getlogin that reads from the utmp registry
         echo
         echo "Warning: Eric's uninstall script is not compatible with your terminal application."
         echo "You might need to type your password to try a workaround which requires sudo access,"
