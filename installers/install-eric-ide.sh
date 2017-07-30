@@ -44,9 +44,6 @@ then
   fi
 fi
 
-mkdir -p ${ERIC_INSTALL}
-mkdir -p ${HOME}/bin
-
 echo
 echo "Creating virtual environment in ${ERIC_INSTALL}/venv"
 which virtualenv > /dev/null
@@ -55,9 +52,11 @@ then
   echo "*** Error: virtualenv cannot be found. Please install it and try again."
   echo "*** To install it in Debian/Ubuntu run:"
   echo "sudo apt install virtualenv"
-  rmdir ${ERIC_INSTALL}
   exit 1
 fi
+
+mkdir -p ${ERIC_INSTALL}
+mkdir -p ${HOME}/bin
 virtualenv -p python3 ${ERIC_INSTALL}/venv
 [ $? -ne 0 ] && echo "*** Error: Creation of virtualenv in ${ERIC_INSTALL}/venv failed" && exit 1
 
@@ -98,4 +97,4 @@ DESKTOPFILE
 
 echo
 echo "Eric6 installation complete!"
-echo "You can either type eric6 in the launcher or inside a terminal to run the IDE."
+echo "You can either type eric6 in Unity/Gnome launcher or inside a terminal to run the IDE."
