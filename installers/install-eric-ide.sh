@@ -65,6 +65,11 @@ echo "Installing dependencies in local virtualenv"
 source ${ERIC_INSTALL}/venv/bin/activate
 pip install pyqt5 qscintilla
 [ $? -ne 0 ] && echo "*** Error when installing requirements in virtualenv" && exit 1
+if [ -n "$EXTRA_PIP" ];
+then
+    pip install $EXTRA_PIP
+    [ $? -ne 0 ] && echo "*** Error installing extra requirements in virtualenv: $EXTRA_PIP." && exit 1
+fi
 
 echo
 echo "Downloading bundle to /tmp/eric6-${LATEST_VERSION}.tar.gz"
